@@ -42,7 +42,8 @@ main:
     movq $input, %rdi #param1: input format string
     leaq -16(%rbp), %rsi #param2: address of the reserved space
     call scanf
-    movq %rsi, %rcx #move exponent to rcx
+    movq -16(%rbp), %rsi #move exponent to rsi
+    movq %rbx, %rdi #move base to rdi
 
     call pow
 
@@ -75,10 +76,10 @@ pow:
     movq $1, %rax #initialize result to 1
 
 loop: #loop to calculate power
-    decq %rcx #decrement exponent/loop counter
-    cmpq $0, %rcx #compare if exponent is 0
+    decq %rsi #decrement exponent/loop counter
+    cmpq $0, %rsi #compare if exponent is 0
     jl end #exit loop to end if less than 0
-    mulq %rbx #multiply result by base
+    mulq %rdi #multiply result by base
     jmp loop #repeat loop
 end:
     #epilogue
