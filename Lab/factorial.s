@@ -48,6 +48,14 @@ main:
     movq $0, %rdi 
     call exit
 
+# *********************************************
+# * Subroutine: factorial                     *
+# * Description: this subroutine calculates   *
+# * the factorial of the input                *
+# * Parameters: inputs: %rdi - number         *
+# * output: %rax - result                     *
+# *********************************************
+
 factorial:
 
     #base case
@@ -58,9 +66,13 @@ factorial:
     pushq %rbp #push the base pointer
     movq %rsp, %rbp #copy stack pointer value to base pointer
 
+    pushq $0 #prepare stack allignment
+    pushq %rdi #save number onto stack for use after recursion
+
     decq %rdi #decrement number
     call factorial #recursive call
-    incq %rdi #increment number
+
+    popq %rdi #revert number value
     mulq %rdi #multiply result by number
 
 
@@ -76,32 +88,3 @@ finish:
 
     mov $1, %rax #initialize result to 1
     jmp return #exit subroutine
-
-# **************************************************************
-# * Subroutine: pow                                            *
-# * Description: this subroutine calculates the result of the  *
-# * exponentiation                                             *
-# * Parameters: inputs: %rbx - base, %rcx - exponent           *
-# * output: %rax - result                                      *
-# **************************************************************
-
-pow:
-
-    #prologue
-    pushq %rbp #push the base pointer
-    movq %rsp, %rbp #copy stack pointer value to base pointer
-
-    movq $1, %rax #initialize result to 1
-
-loop: #loop to calculate power
-    decq %rsi #decrement exponent/loop counter
-    cmpq $0, %rsi #compare if exponent is 0
-    jl end #exit loop to end if less than 0
-    mulq %rdi #multiply result by base
-    jmp loop #repeat loop
-end:
-    #epilogue
-    movq %rbp, %rsp #clear local variables from stack
-    popq %rbp #restore base pointer location
-
-    ret #return from subroutine

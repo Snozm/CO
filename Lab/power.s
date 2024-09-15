@@ -4,7 +4,7 @@
 # **************************************************************
 .text
 
-intro: .asciz "\nThis code is for assignment 1: Powers. We are Andrey Petrov(apetrov1) and Yassine el Hattachi(yelhattachi). \n"
+intro: .asciz "\nThis code is for assignment 1: Powers. We are Andrey Petrov(apetrov1) and Yassine el Hattachi(yelhattachi).\n"
 base: .asciz "\nEnter the base:\n"
 exponent: .asciz "\nEnter the exponent:\n"
 input: .asciz "%ld"
@@ -63,7 +63,7 @@ main:
 # * Subroutine: pow                                            *
 # * Description: this subroutine calculates the result of the  *
 # * exponentiation                                             *
-# * Parameters: inputs: %rbx - base, %rcx - exponent           *
+# * Parameters: inputs: %rdi - base, %rsi - exponent           *
 # * output: %rax - result                                      *
 # **************************************************************
 
