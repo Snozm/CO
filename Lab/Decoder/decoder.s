@@ -51,7 +51,7 @@ printLoop:
 end:
 	decq %r12 #decrement # of times to print/loop 
 
-	cmpq $0, %r12 #check if another loop needs to happen
+	cmpq $0, %r12 #check if another printing loop needs to happen
 	jg printLoop
 
 	movq (%rbx, %r13, 8), %r13 # store copy of a row of $MESSAGE used for navigating the data
